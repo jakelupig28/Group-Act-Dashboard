@@ -18,7 +18,7 @@ const Dashboard = () => {
 
       // If role is not Admin, redirect to the staff page
     if (storedRole !== "Admin") {
-        navigate("/staff");
+        navigate("/student");
       }
     } else {
       // If no user or role found in localStorage, redirect to login

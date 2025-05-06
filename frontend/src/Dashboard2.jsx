@@ -1,5 +1,5 @@
 
-// JAKE G. LUPIG
+// JAKE G. LUPIG - ADMIN2
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

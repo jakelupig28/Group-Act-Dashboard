@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { TextField, Button, Container, Typography } from "@mui/material";
+import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -13,37 +13,73 @@ const Login = () => {
       alert("Please fill in all fields");
       return;
     }
-  
+
     try {
       const response = await axios.post(
-        "http://localhost:5000/login", 
+        "http://localhost:5000/login",
         { username, password },
         { headers: { "Content-Type": "application/json" } }
       );
-  
-      // Store token, username, and role in localStorage
+
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("username", response.data.username); // Store username
-      localStorage.setItem("role", response.data.role); // Store role
-  
+      localStorage.setItem("username", response.data.username);
+      localStorage.setItem("role", response.data.role);
+
       alert("Login successful!");
-      // Redirect to dashboard
       navigate("/dashboard");
     } catch (error) {
       alert(error.response?.data?.message || "Invalid credentials");
     }
   };
-  
 
   return (
-    <Container maxWidth="xs">
-      <Typography variant="h4">Login</Typography>
-      <TextField label="Username" fullWidth margin="normal" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <TextField label="Password" type="password" fullWidth margin="normal" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <Button variant="contained" color="primary" fullWidth onClick={handleLogin}>
-        Login
-      </Button>
-    </Container>
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#f5f5f5", // optional background color
+      }}
+    >
+      <Box
+        sx={{
+          width: 300,
+          padding: 4,
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: "white",
+        }}
+      >
+        <Typography variant="h5" align="center" gutterBottom>
+          Login
+        </Typography>
+        <TextField
+          label="Username"
+          fullWidth
+          margin="normal"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          fullWidth
+          margin="normal"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2 }}
+          onClick={handleLogin}
+        >
+          Login
+        </Button>
+      </Box>
+    </Box>
   );
 };
 

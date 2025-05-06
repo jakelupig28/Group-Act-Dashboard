@@ -8,9 +8,9 @@ import Dashboard2 from "./Dashboard2";
 import Dashboard3 from "./Dashboard3";
 import Dashboard4 from "./Dashboard4";
 import Dashboard5 from "./Dashboard5";
-import Staff from "./Staff";
-import Staff2 from "./Staff2";
-import Staff3 from "./Staff3";
+import Student from "./Student";
+import Student2 from "./Student2";
+import Student3 from "./Student3";
 
 
 function App() {
@@ -20,9 +20,9 @@ function App() {
         <Route path="/" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/staff" element={<Staff />} />
-        <Route path="/staff2" element={<Staff2/>} />
-        <Route path="/staff3" element={<Staff3 />} />
+        <Route path="/student" element={<Student />} />
+        <Route path="/student2" element={<Student2/>} />
+        <Route path="/student3" element={<Student3 />} />
      
      
         <Route path="/admin1" element={<Dashboard1 />} />

@@ -17,7 +17,7 @@ const db = mysql2.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "jake_db",
+  database: "dashboard_db",
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,

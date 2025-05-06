@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, Button } from "@mui/material";
 
-const Staff = () => {
+const Student2 = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [userRole, setRole] = useState("");
@@ -17,8 +17,8 @@ const Staff = () => {
       setRole(storedRole);
 
       // If role is not Admin, redirect to the staff page
-    if (storedRole !== "Staff") {
-        navigate("/staff2");
+    if (storedRole !== "Student2") {
+        navigate("/student3");
       }
     } else {
       // If no user or role found in localStorage, redirect to login
@@ -50,4 +50,4 @@ const Staff = () => {
   );
 };
 
-export default Staff;
+export default Student2;
