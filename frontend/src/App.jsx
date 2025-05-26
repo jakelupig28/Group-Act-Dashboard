@@ -11,6 +11,8 @@ import Dashboard5 from "./Dashboard5";
 import Student from "./Student";
 import Student2 from "./Student2";
 import Student3 from "./Student3";
+import Student4 from "./Student4";
+import Student5 from "./Student5";
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path="/student" element={<Student />} />
         <Route path="/student2" element={<Student2/>} />
         <Route path="/student3" element={<Student3 />} />
+        <Route path="/student4" element={<Student4 />} />
+        <Route path="/student5" element={<Student5 />} />
      
      
         <Route path="/admin1" element={<Dashboard1 />} />
