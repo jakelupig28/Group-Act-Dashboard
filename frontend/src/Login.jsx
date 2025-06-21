@@ -23,7 +23,7 @@ const Login = () => {
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("username", response.data.username);
-      localStorage.setItem("role", response.data.role);
+       localStorage.setItem("role", response.data.role);
 
       alert("Login successful!");
       navigate("/dashboard");
@@ -33,53 +33,36 @@ const Login = () => {
   };
 
   return (
-    <Box
-      sx={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#f5f5f5", // optional background color
-      }}
-    >
-      <Box
-        sx={{
-          width: 300,
-          padding: 4,
-          borderRadius: 2,
-          boxShadow: 3,
-          backgroundColor: "white",
-        }}
-      >
-        <Typography variant="h5" align="center" gutterBottom>
-          Login
-        </Typography>
-        <TextField
-          label="Username"
-          fullWidth
-          margin="normal"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <TextField
-          label="Password"
-          type="password"
-          fullWidth
-          margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          sx={{ mt: 2 }}
-          onClick={handleLogin}
-        >
+    <Container className="register-container">
+      <Typography className="register-title">
+        <h1>Login</h1>
+      </Typography>
+      <TextField
+        label="Username"
+        fullWidth
+        margin="normal"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <TextField
+        label="Password"
+        type="password"
+        fullWidth
+        margin="normal"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <Box mt={2}>
+        <Button variant="contained" color="primary" fullWidth onClick={handleLogin}>
           Login
         </Button>
       </Box>
-    </Box>
+      <Box mt={1}>
+        <Button variant="outlined" color="secondary" fullWidth onClick={() => navigate("/register")}>
+          Don't have an account? Register
+        </Button>
+      </Box>
+    </Container>
   );
 };
 

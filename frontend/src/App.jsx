@@ -13,13 +13,14 @@ import Student2 from "./Student2";
 import Student3 from "./Student3";
 import Student4 from "./Student4";
 import Student5 from "./Student5";
+import "./App.css";
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/student" element={<Student />} />

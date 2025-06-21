@@ -1,9 +1,16 @@
-
 // IGNACIO - ADMIN5
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Typography, Button } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Button,
+  AppBar,
+  Toolbar,
+  Grid,
+  Paper
+} from "@mui/material";
 
 const Dashboard5 = () => {
   const navigate = useNavigate();
@@ -11,48 +18,71 @@ const Dashboard5 = () => {
   const [userRole, setRole] = useState("");
 
   useEffect(() => {
-    // Retrieve the user and role from localStorage
     const storedUser = localStorage.getItem("username");
     const storedRole = localStorage.getItem("role");
 
-    console.log("Stored User:", storedUser); // Debugging log
-    console.log("Stored Role:", storedRole); // Debugging log
+    console.log("Stored User:", storedUser);
+    console.log("Stored Role:", storedRole);
 
     if (storedUser && storedRole) {
       setUser(storedUser);
       setRole(storedRole);
 
-      // If the user is not a staff member, redirect them
       if (storedRole !== "Admin5") {
-        console.log("Not Admin5, redirecting to login..."); // Debugging log
+        console.log("Not Admin5, redirecting to login...");
         navigate("/login");
       }
     } else {
-      console.log("No user or role found, redirecting to login..."); // Debugging log
-
+      console.log("No user or role found, redirecting to login...");
+      navigate("/login");
     }
   }, [navigate]);
 
-  return (
-    <Container>
-      <Typography variant="h4">
-        Welcome {userRole} {user}
-      </Typography>
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    navigate("/login");
+  };
 
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => {
-          // Clear localStorage and redirect to login
-          localStorage.removeItem("token");
-          localStorage.removeItem("username");
-          localStorage.removeItem("role");
-          navigate("/login");
-        }}
-      >
-        Logout
-      </Button>
-    </Container>
+  return (
+    <>
+      <AppBar position="static">
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography variant="h6">Admin5 Dashboard</Typography>
+          <Button color="inherit" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Toolbar>
+      </AppBar>
+
+      <Container sx={{ mt: 4 }}>
+        <Typography variant="h5" gutterBottom>
+          Welcome, {userRole} {user}
+        </Typography>
+
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Typography variant="h6">Forms</Typography>
+              <Typography variant="body2">Review submitted forms</Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Typography variant="h6">Audit</Typography>
+              <Typography variant="body2">System logs & history</Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Typography variant="h6">Updates</Typography>
+              <Typography variant="body2">Track version and changes</Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
 };
 
