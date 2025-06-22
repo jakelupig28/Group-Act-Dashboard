@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Container,
-  Typography,
-  Button,
   AppBar,
   Toolbar,
+  Typography,
+  Button,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Box,
   Grid,
   Paper
 } from "@mui/material";
+
+const drawerWidth = 240;
 
 const Student = () => {
   const navigate = useNavigate();
@@ -40,19 +46,73 @@ const Student = () => {
   };
 
   return (
-    <>
-      <AppBar position="static">
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="h6">Student Dashboard</Typography>
-          <Button color="inherit" onClick={handleLogout}>
-            Logout
-          </Button>
-        </Toolbar>
-      </AppBar>
+    <Box sx={{ display: "flex" }}>
+      {/* Sidebar Drawer */}
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: "border-box" },
+        }}
+      >
+   <Toolbar />
+<Box sx={{ overflow: "auto" }}>
+  <List>
+    <ListItem
+      button
+      onClick={() => navigate("/student")}
+      sx={{
+        pl: 3,
+        "&:hover": {
+          backgroundColor: "#f0f0f0", // light gray
+        },
+      }}
+    >
+      <ListItemText
+        primary="Dashboard"
+        primaryTypographyProps={{ fontWeight: "bold" }}
+      />
+    </ListItem>
 
-      <Container sx={{ mt: 4 }}>
+    <ListItem
+      button
+      onClick={() => navigate("/Emailform")}
+      sx={{
+        pl: 3,
+        "&:hover": {
+          backgroundColor: "#f0f0f0", // light gray
+        },
+      }}
+    >
+      <ListItemText
+        primary="Email Us"
+        primaryTypographyProps={{ fontWeight: "bold" }}
+      />
+    </ListItem>
+  </List>
+</Box>
+
+
+
+
+      </Drawer>
+
+      {/* Main Content */}
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <AppBar position="fixed" sx={{ zIndex: 1201 }}>
+          <Toolbar sx={{ justifyContent: "space-between" }}>
+            <Typography variant="h6">Student Dashboard</Typography>
+            <Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
+          </Toolbar>
+        </AppBar>
+
+        <Toolbar /> {/* Spacer for AppBar */}
+
         <Typography variant="h5" gutterBottom>
-          Welcome, {userRole} {user}
+          <b>Welcome, {userRole} {user}</b>
         </Typography>
 
         <Grid container spacing={3}>
@@ -77,8 +137,8 @@ const Student = () => {
             </Paper>
           </Grid>
         </Grid>
-      </Container>
-    </>
+      </Box>
+    </Box>
   );
 };
 

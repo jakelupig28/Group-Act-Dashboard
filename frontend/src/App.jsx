@@ -13,6 +13,7 @@ import Student2 from "./Student2";
 import Student3 from "./Student3";
 import Student4 from "./Student4";
 import Student5 from "./Student5";
+import Emailform from "./Emailform";
 import "./App.css";
 
 
@@ -28,6 +29,8 @@ function App() {
         <Route path="/student3" element={<Student3 />} />
         <Route path="/student4" element={<Student4 />} />
         <Route path="/student5" element={<Student5 />} />
+        <Route path="/Emailform" element={<Emailform />} />
+
      
      
         <Route path="/admin1" element={<Dashboard1 />} />

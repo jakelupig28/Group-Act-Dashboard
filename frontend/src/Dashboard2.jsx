@@ -1,18 +1,24 @@
-// JAKE G. LUPIG - ADMIN2
+// JAYSON GARCIA - ADMIN1
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Container,
+  Box,
   Typography,
   Button,
   AppBar,
   Toolbar,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
   Grid,
-  Paper
+  Paper,
 } from "@mui/material";
 
-const Dashboard2 = () => {
+const drawerWidth = 240;
+
+const Dashboard1 = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [userRole, setRole] = useState("");
@@ -21,19 +27,14 @@ const Dashboard2 = () => {
     const storedUser = localStorage.getItem("username");
     const storedRole = localStorage.getItem("role");
 
-    console.log("Stored User:", storedUser);
-    console.log("Stored Role:", storedRole);
-
     if (storedUser && storedRole) {
       setUser(storedUser);
       setRole(storedRole);
 
       if (storedRole !== "Admin2") {
-        console.log("Not Admin2, redirecting to /admin3...");
         navigate("/admin3");
       }
     } else {
-      console.log("No user or role found, redirecting to login...");
       navigate("/login");
     }
   }, [navigate]);
@@ -46,44 +47,82 @@ const Dashboard2 = () => {
   };
 
   return (
-    <>
-      <AppBar position="static">
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="h6">Admin2 Dashboard</Typography>
-          <Button color="inherit" onClick={handleLogout}>
-            Logout
-          </Button>
-        </Toolbar>
-      </AppBar>
+    <Box sx={{ display: "flex" }}>
+      {/* Sidebar Drawer */}
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+        }}
+      >
+        <Toolbar />
+        <Box sx={{ overflow: "auto" }}>
+          <List>
+          <ListItem
+  button
+  onClick={() => navigate("/admin1")}
+  sx={{
+    pl: 3,
+    "&:hover": {
+      backgroundColor: "#e0f2f1", // light teal
+    },
+  }}
+>
+  <ListItemText
+    primary="Dashboard"
+    primaryTypographyProps={{ fontWeight: "bold" }}
+  />
+</ListItem>
 
-      <Container sx={{ mt: 4 }}>
-        <Typography variant="h5" gutterBottom>
+          </List>
+        </Box>
+      </Drawer>
+
+      {/* Main Content */}
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+       <AppBar position="fixed" sx={{ zIndex: 1201, backgroundColor: "#009688" }}>
+  <Toolbar sx={{ justifyContent: "space-between" }}>
+    <Typography variant="h6">Admin Dashboard</Typography>
+    <Button sx={{ color: "#fff" }} onClick={handleLogout}>
+      Logout
+    </Button>
+  </Toolbar>
+</AppBar>
+
+        <Toolbar /> {/* Spacer for AppBar */}
+
+        <Typography variant="h5" gutterBottom fontWeight="bold">
           Welcome, {userRole} {user}
         </Typography>
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={4}>
             <Paper elevation={3} sx={{ p: 3 }}>
-              <Typography variant="h6">User Access</Typography>
-              <Typography variant="body2">Manage user permissions</Typography>
+              <Typography variant="h6">Admin Panel</Typography>
+              <Typography variant="body2">Manage system controls</Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Paper elevation={3} sx={{ p: 3 }}>
-              <Typography variant="h6">System Logs</Typography>
-              <Typography variant="body2">Review system activities</Typography>
+              <Typography variant="h6">Reports</Typography>
+              <Typography variant="body2">View activity logs</Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Paper elevation={3} sx={{ p: 3 }}>
-              <Typography variant="h6">Support Requests</Typography>
-              <Typography variant="body2">Track open tickets</Typography>
+              <Typography variant="h6">Messages</Typography>
+              <Typography variant="body2">No new messages</Typography>
             </Paper>
           </Grid>
         </Grid>
-      </Container>
-    </>
+      </Box>
+    </Box>
   );
 };
 
-export default Dashboard2;
+export default Dashboard1;

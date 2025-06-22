@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 require("dotenv").config();
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = 5000;
@@ -98,6 +99,45 @@ app.post("/login", (req, res) => {
       role: user.role, // Ensure this is being sent back
     });
   });
+});
+
+
+
+app.post('/api/send-email', async (req, res) =>{
+    const {to, subject, message } = req.body;
+
+            try {
+            const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER, 
+                pass: process.env.EMAIL_PASS,
+            } 
+
+             });
+
+             const mailOptions = {
+                from: process.env.EMAIL_USER,
+                to,
+                subject,
+                text: message
+             }
+             await transporter.sendMail(mailOptions);
+
+             await db.execute(
+                'INSERT INTO email_logs (recipient, subject, message, sent_at) VALUES (?,?,?, NOW())',
+                [to, subject, message]
+             );
+             res.json({ success: true, message: 'Email Sent logged!'});
+
+             }
+
+
+            catch (error) {
+                console.error(error);
+                res.status(500).json({success: false, message: 'Failed to send the email'})
+            }
+       
 });
 
 
