@@ -1,4 +1,4 @@
-// JAYSON GARCIA - ADMIN1
+// ADMIN2
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
