@@ -18,11 +18,10 @@ const db = mysql2.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "ssss_db",
+  database: "dashboardd_db",
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-  port: 4306
 });
 
 db.getConnection((err) => {
